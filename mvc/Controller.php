@@ -1,6 +1,6 @@
 <?php
 /*
- *      config.php
+ *      Controller.php
  *      
  *      Copyright 2017 ibragim <ibragim@server10>
  *      
@@ -20,12 +20,42 @@
  *      MA 02110-1301, USA.
  */
 
-define('USERS_TABLE','users');
-return array(
-	'servername' => 'localhost',
-	'username' => 'dbadm',
-	'password' => 'Hyve43XcmcL77Kdj',
-	'dbname' => 'data_test',
-);
+class Controller
+{
+    private $model;
+    public function __construct($model){
+        $this->model = $model;
+    }
+    
+    public function Login($sLogin, $sPasswd) {
+		if ( (isset($sLogin) && !empty($sLogin)) && (isset($sPasswd) && !empty($sPasswd)) ) {
+			$sLogin=trim(strip_tags($sLogin));
+			$sPasswd=trim(strip_tags($sPasswd));
+			return $this->model->Login($sLogin, md5($sPasswd));
+		}
+		return false;
+    }
+    public function Logout() {
+		$this->model->Logout();
+		return true;
+    }    
+    
+    public function Main() {
+		return $this->model->GetBalance();
+	}
+    
+    public function CashOut() {
+		return $this->model->GetBalance();
+	}
+    
+	public function GetCash($dSum) {
+		$dSum=trim(strip_tags($dSum));
+		if ( isset($dSum) && !is_float($dSum) && $dSum>0 ) {
+			return $this->model->GetCash($dSum);
+		}
+		return false;
+	}
+    
+}
 
 ?>
