@@ -47,14 +47,16 @@ class View
 				<br><br>
 				<input type="submit" value="Вход">
 				</fieldset>
-			</form>'.$this->sE ;
+			</form>'
+			.'<p></br> <a href="index.php?action=GetUsersBalance">список</a></p>'
+			.$this->sE ;
     }   
 
     public function Main($bR) {
 		if (!$bR) {
 			return $this->sH.
-				'<H2>Welcome '.$this->model->sUserName.'</H2>'.
-				'<p>Баланс: '.$this->model->dBalance.'</p>'.
+				'<H2>Welcome '.$this->model->Usr->getUName().'</H2>'.
+				'<p>Баланс: '.$this->model->Usr->getUBalance().'</p>'.
 				'<p><b>ошибка</b></p>'.
 				'<p><a href="index.php?action=CashOut">Вывести</a></p>'.
 				'<p><a href="index.php?action=Logout">Выход</a></p>'
@@ -62,14 +64,14 @@ class View
 		}
 		else {
 			return $this->sH.
-				'<H2>Welcome '.$this->model->sUserName.'</H2>'.
-				'<p>Баланс:'.$this->model->dBalance.'</p>'.
+				'<H2>Welcome '.$this->model->Usr->getUName().'</H2>'.
+				'<p>Баланс:'.$this->model->Usr->getUBalance().'</p>'.
 				'<p></p>'.
 				'<p><a href="index.php?action=CashOut">Вывести</a></p>'.
 				'<p><a href="index.php?action=Logout">Выход</a></p>'
 			.$this->sE ;
 		}
-	}     
+	}
     
     public function Login($bLogIn) {
 		if ($bLogIn) { return $this->Main(true); }
@@ -85,7 +87,7 @@ class View
     
 	public function CashOut() {
 		return $this->sH.
-			'<p>Баланс: '.$this->model->dBalance.'</p> </br>'.
+			'<p>Баланс: '.$this->model->Usr->getUBalance().'</p> </br>'.
 			'<form action="/index.php?action=GetCash" method="post">
 				Вывести:
 				<input type="text" name="getcash" value="5">
@@ -93,6 +95,24 @@ class View
 			</form>'.
 			'<p><a href="index.php?action=Cancel">Отмена</a></p>'.$this->sE ;
 	}
+
+    public function show($bR) {
+		if (!$bR) {
+			return $this->sH.
+				'<H3>Get users error</H3>'.
+				'<p><a href="index.php">Start</a></p>'
+			.$this->sE ;
+		}
+		else {
+			$t='<table border=1> <tr><th>id</th><th>name</th><th>balance</th></tr>'; 
+			foreach ($this->model->Users as $value) {
+				$t=$t.'<tr><td>'.$value->getUId(). '</td><td>'.$value->getUName(). '</td><td>'.$value->getUBalance(). '</td></tr>'; 
+			}
+			$t=$t.'</table>';
+			return $this->sH.$t.'<p><a href="index.php">Start</a></p>'.$this->sE ;
+		}
+	}
+
 }
 
 ?>

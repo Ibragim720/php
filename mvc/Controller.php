@@ -56,6 +56,10 @@ class Controller
 		return false;
 	}
     
+    public function GetUsersBalance($sPrm) {
+		$sPrm=trim(strip_tags($sPrm));
+		return $this->model->GetUsersBalance($sPrm);
+	}    
 }
 
 ?>
