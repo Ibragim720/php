@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 08, 2017 at 03:32 PM
+-- Generation Time: Nov 10, 2017 at 01:55 AM
 -- Server version: 5.1.73
 -- PHP Version: 5.2.17-0ubuntu0ppa3~lucid
 
@@ -30,17 +30,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `login` varchar(16) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(35) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `c` decimal(15,5) unsigned NOT NULL,
+  `c` decimal(15,5) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`),
   KEY `password` (`password`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `login`, `password`, `name`, `c`) VALUES
-(1, 'user1', '24c9e15e52afc47c225b757e7bee1f9d', 'User One ', '29999.99000'),
-(2, 'user2', '7e58d63b60197ceb55a1c487989a3720', 'User Two', '599999.90000'),
-(3, 'user3', '92877af70a45fd6a2ed7fe81e1236b78', 'User Three', '1599999.95000');
+(1, 'user1', '24c9e15e52afc47c225b757e7bee1f9d', 'Петр Алексеев', '90.00000'),
+(2, 'user2', '7e58d63b60197ceb55a1c487989a3720', 'Анатолий Иванов', '599999.90000'),
+(3, 'user3', '92877af70a45fd6a2ed7fe81e1236b78', 'User Three', '1599941.95000');

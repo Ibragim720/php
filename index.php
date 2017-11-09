@@ -20,7 +20,7 @@
  *      MA 02110-1301, USA.
  */
 
-session_start();
+
 header("Content-Type:text/html;charset=UTF-8");
  
 $sDirRoot = dirname(realpath((__FILE__).'/'));
@@ -29,7 +29,7 @@ require_once($sDirRoot.'mvc/Model.php');
 require_once($sDirRoot.'mvc/Controller.php');
 require_once($sDirRoot.'mvc/View.php');
 require_once($sDirRoot.'mvc/Logger.php');
-
+session_start();
 
 	$model = new Model();
 	$controller = new Controller($model);
@@ -39,7 +39,6 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 	switch ($_GET['action']) {
 		case 'Login': 
 			echo $view->Login( $controller->{$_GET['action']}($_POST['login'], $_POST['password']) );
-			sleep(2);
 		break;
 		case 'Logout': 
 			$controller->{$_GET['action']}();
@@ -54,12 +53,14 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 		case 'Cancel': 
 			echo $view->Main($controller->Main());
 		break;
-		
+		case 'GetUsersBalance': 
+			echo $view->show( $controller->{$_GET['action']}($_GET['ids']) );
+		break;
+
 		default:
-			echo $view->output();
+			echo $view->Start();
 		break;
 	}
-    
 }
 else {
 	echo $view->Start();
