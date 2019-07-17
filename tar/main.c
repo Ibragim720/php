@@ -40,7 +40,7 @@ void run_1(const int n)
 int main(int argc, char **argv)
 {
     printf("hello %d\n", argc);
-    printf("hello world and mr Kim\n");
+    printf("hello world\n");
     run_1(10000000);
     return 0;
 }
